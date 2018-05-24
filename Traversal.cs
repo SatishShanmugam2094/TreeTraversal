@@ -68,33 +68,7 @@ namespace TreeTraversal
         //                return;
 
         //            }
-        //            else if (element.left != null || element.right != null)
-        //            {
-        //                if (element.left != null)
-        //                {
-        //                    Node current = element.left;
-        //                    if (current.left == null)
-        //                    {
-        //                        element = current;
-        //                    }
-        //                    else if (current.right == null)
-        //                    {
-        //                        element = current;
-        //                    }
-
-        //                }
-        //                else if (element.right != null)
-        //                {
-        //                    Node current = element.right;
-        //                    if (current.left == null)
-        //                    {
-        //                        element = current;
-        //                    }
-        //                    else if (current.right == null)
-        //                    {
-        //                        element = current;
-        //                    }
-        //                    else
+        //           
         //                    {
         //                        element = element.left;
         //                    }
