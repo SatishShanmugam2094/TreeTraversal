@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TreeTraversal
+﻿namespace TreeTraversal
 {
     public class Traversal
     {
         private Node root = null;
-        private Node nextRoot = null;
-      
+        private int count = 0;
+        private int heightLimit = 3;
+        private int rightTreeLimit = 1;
+        private int previouseHeight = 0;
 
         public Traversal()
         {
@@ -23,93 +19,60 @@ namespace TreeTraversal
             if (element == null)
             {
                 root = newNode;
+                count++;
                 return;
             }
             else
             {
-                Add(root, newNode);
+                int iteration = 0;
+                Add(root, newNode, iteration);
             }
         }
-        public void Add(Node current ,Node toadd)
+        public void Add(Node current, Node toadd, int iteration)
         {
-            if(current.left == null)
+            iteration++;
+            if (current.left == null)
             {
                 current.left = toadd;
+                count++;
+            }
+            else if (current.right == null)
+            {
+                current.right = toadd;
+                count++;
+                if (count == heightLimit)
+                {
+                    heightLimit = 2 * count + 1;
+                    previouseHeight = rightTreeLimit;
+                    rightTreeLimit = rightTreeLimit * 2;
+                }
+
+            }
+            else if (count < (heightLimit - rightTreeLimit))
+            {
+                if (previouseHeight == 1 || count < (heightLimit - rightTreeLimit - previouseHeight) || iteration < previouseHeight)
+                {
+                    Add(current.left, toadd, iteration);
+                }
+                else
+                {
+                    Add(current.right, toadd, iteration);
+                }
             }
             else
             {
-                Add(current.left, toadd);
+                if (previouseHeight == 1 || iteration < previouseHeight || count >= heightLimit - previouseHeight)
+                {
+                    Add(current.right, toadd, iteration);
+                }
+                else
+                {
+                    Add(current.left, toadd, iteration);
+                }
             }
+
         }
-        //public void Insert(int data)
-        //{
-        //    Node newNode = new Node(data);
-        //    Node element = root;
-        //    if (element == null)
-        //    {
-        //        root = newNode;
-        //        return;
-        //    }
-        //    else
-        //    {
-        //        while (element != null)
-        //        {
-        //            if (element.left == null)
-        //            {
-        //                element.left = newNode;
-        //                // nextRoot = newNode;
-        //                return;
-        //            }
-        //            else if (element.right == null)
-        //            {
-        //                // element = nextRoot;
-        //                element.right = newNode;
-        //                // nextRoot = newNode;
-        //                return;
 
-        //            }
-        //           
-        //                    {
-        //                        element = element.left;
-        //                    }
-        //                }
-
-        //            }
-        //            //else if (element.left != null || element.right != null)
-        //            //{
-        //            //    if (element.left != null)
-        //            //    {
-        //            //        Node current = element.left;
-        //            //        if (current.left == null)
-        //            //        {
-        //            //            element = current;
-        //            //        }
-        //            //        else if (current.right == null)
-        //            //        {
-        //            //            element = current;
-        //            //        }
-
-        //            //    }
-        //            //    if (element.right != null)
-        //            //    {
-        //            //        Node current = element.right;
-        //            //        if (current.left == null)
-        //            //        {
-        //            //            element = current;
-        //            //        }
-        //            //        else if (current.right == null)
-        //            //        {
-        //            //            element = current;
-        //            //        }
-        //            //        else
-        //            //        {
-        //            //            element = element.left;
-        //            //        }
-        //            //    }
-        //            //}
-        //        }
-        //    }
-        //}
         //public void Preorder(Node root)
         //{
         //    if (root != null)

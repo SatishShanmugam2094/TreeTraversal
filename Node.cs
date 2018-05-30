@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TreeTraversal
+﻿namespace TreeTraversal
 {
-   public class Node
+    public class Node
     {
         public Node left;
         public Node right;
