@@ -1,4 +1,6 @@
-﻿namespace TreeTraversal
+﻿using System;
+
+namespace TreeTraversal
 {
     public class Traversal
     {
@@ -12,6 +14,14 @@
         {
 
         }
+        public Node GetRoot
+        {
+            get
+            {
+                return root;
+            }
+        }
+      
         public void Insert(int data)
         {
             Node newNode = new Node(data);
@@ -24,21 +34,21 @@
             }
             else
             {
-                int iteration = 0;
+                int iteration =  0;
                 Add(root, newNode, iteration);
             }
         }
-        public void Add(Node current, Node toadd, int iteration)
+        public void Add(Node current, Node toAdd, int iteration)
         {
             iteration++;
             if (current.left == null)
             {
-                current.left = toadd;
+                current.left = toAdd;
                 count++;
             }
             else if (current.right == null)
             {
-                current.right = toadd;
+                current.right = toAdd;
                 count++;
                 if (count == heightLimit)
                 {
@@ -46,59 +56,59 @@
                     previouseHeight = rightTreeLimit;
                     rightTreeLimit = rightTreeLimit * 2;
                 }
-
+              
             }
+
             else if (count < (heightLimit - rightTreeLimit))
             {
                 if (previouseHeight == 1 || count < (heightLimit - rightTreeLimit - previouseHeight) || iteration < previouseHeight)
                 {
-                    Add(current.left, toadd, iteration);
+                    Add(current.left, toAdd, iteration);
                 }
                 else
                 {
-                    Add(current.right, toadd, iteration);
+                    Add(current.right, toAdd, iteration);
                 }
             }
             else
             {
                 if (previouseHeight == 1 || iteration < previouseHeight || count >= heightLimit - previouseHeight)
                 {
-                    Add(current.right, toadd, iteration);
+                    Add(current.right, toAdd, iteration);
                 }
                 else
                 {
-                    Add(current.left, toadd, iteration);
+                    Add(current.left, toAdd, iteration);
                 }
             }
-
         }
 
-        //public void Preorder(Node root)
-        //{
-        //    if (root != null)
-        //    {
-        //        Console.Write(root.item + " ");
-        //        Preorder(root.left);
-        //        Preorder(root.right);
-        //    }
-        //}
-        //public void Inorder(Node root)
-        //{
-        //    if (root != null)
-        //    {
-        //        Inorder(root.left);
-        //        Console.Write(root.item + " ");
-        //        Inorder(root.right);
-        //    }
-        //}
-        //public void Postorder(Node root)
-        //{
-        //    if (root != null)
-        //    {
-        //        Postorder(root.left);
-        //        Postorder(root.right);
-        //        Console.Write(root.item + " ");
-        //    }
-        //}
+        public void Preorder(Node node)
+        {
+            if (node != null)
+            {
+                Console.Write(node.item + " ");
+                Preorder(node.left);
+                Preorder(node.right);
+            }
+        }
+        public void Inorder(Node node)
+        {
+            if (node != null)
+            {
+                Inorder(node.left);
+                Console.Write(node.item + " ");
+                Inorder(node.right);
+            }
+        }
+        public void Postorder(Node node)
+        {
+            if (node != null)
+            {
+                Postorder(node.left);
+                Postorder(node.right);
+                Console.Write(node.item + " ");
+            }
+        }
     }
 }

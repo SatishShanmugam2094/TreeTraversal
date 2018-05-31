@@ -7,22 +7,17 @@ namespace TreeTraversal
         static void Main(string[] args)
         {
             Traversal tree = new Traversal();
-            tree.Insert(1);
-            tree.Insert(2);
-            tree.Insert(3);
-            tree.Insert(4);
-            tree.Insert(5);
-            tree.Insert(6);
-            tree.Insert(7);
-            tree.Insert(8);
-            //tree.Insert(9);
-            //tree.Insert(10);
-            //tree.Insert(11);
-            //tree.Insert(12);
-            //tree.Insert(13);
-            //tree.Insert(14);
-            //tree.Insert(15);
-            //tree.Insert(16);
+            for(int i = 1;i<=7;i++)
+            {
+                tree.Insert(i);
+            }
+            
+            Console.WriteLine("Pre-Order elements");
+            tree.Preorder(tree.GetRoot);
+            Console.WriteLine(" \nInorder elements");
+            tree.Inorder(tree.GetRoot);
+            Console.WriteLine(" \nPost-order elements");
+            tree.Postorder(tree.GetRoot);
             Console.Read();
         }
     }

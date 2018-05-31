@@ -2,8 +2,8 @@
 {
     public class Node
     {
-        public Node left;
-        public Node right;
+        public Node left = null;
+        public Node right = null;
         public int item;
 
         public Node(int _value)
