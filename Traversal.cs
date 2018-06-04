@@ -7,8 +7,8 @@ namespace TreeTraversal
         private Node root = null;
         private int count = 0;
         private int heightLimit = 3;
-        private int rightTreeLimit = 1;
-        private int previouseHeight = 0;
+        private bool isAdded = false;
+        private int height = 0;
 
         public Traversal()
         {
@@ -21,7 +21,7 @@ namespace TreeTraversal
                 return root;
             }
         }
-      
+
         public void Insert(int data)
         {
             Node newNode = new Node(data);
@@ -34,53 +34,47 @@ namespace TreeTraversal
             }
             else
             {
-                int iteration =  0;
-                Add(root, newNode, iteration);
+                int heightIteration = -1;
+                Add(root, newNode, heightIteration);
+                isAdded = false;
             }
         }
-        public void Add(Node current, Node toAdd, int iteration)
+        public void Add(Node current, Node toAdd, int iterationOfHeight)
         {
-            iteration++;
-            if (current.left == null)
+            iterationOfHeight++;
+
+            if (current != null)
             {
-                current.left = toAdd;
-                count++;
-            }
-            else if (current.right == null)
-            {
-                current.right = toAdd;
-                count++;
-                if (count == heightLimit)
+                if (current.left == null)
                 {
-                    heightLimit = 2 * count + 1;
-                    previouseHeight = rightTreeLimit;
-                    rightTreeLimit = rightTreeLimit * 2;
+                    current.left = toAdd;
+                    count++;
+                    isAdded = true;
+                    return;
                 }
-              
+                else if (current.right == null)
+                {
+                    current.right = toAdd;
+                    count++;
+                    if (count == heightLimit)
+                    {
+                        height++;
+                        heightLimit = 2 * count + 1;
+                    }
+                    isAdded = true;
+                    return;
+                }
+                if (!isAdded && iterationOfHeight < height)
+                {
+                    Add(current.left, toAdd, iterationOfHeight);
+                }
+                if (!isAdded && iterationOfHeight < height)
+                {
+                    Add(current.right, toAdd, iterationOfHeight);
+                }
+
             }
 
-            else if (count < (heightLimit - rightTreeLimit))
-            {
-                if (previouseHeight == 1 || count < (heightLimit - rightTreeLimit - previouseHeight) || iteration < previouseHeight)
-                {
-                    Add(current.left, toAdd, iteration);
-                }
-                else
-                {
-                    Add(current.right, toAdd, iteration);
-                }
-            }
-            else
-            {
-                if (previouseHeight == 1 || iteration < previouseHeight || count >= heightLimit - previouseHeight)
-                {
-                    Add(current.right, toAdd, iteration);
-                }
-                else
-                {
-                    Add(current.left, toAdd, iteration);
-                }
-            }
         }
 
         public void Preorder(Node node)

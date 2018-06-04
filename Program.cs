@@ -7,7 +7,7 @@ namespace TreeTraversal
         static void Main(string[] args)
         {
             Traversal tree = new Traversal();
-            for(int i = 1;i<=7;i++)
+            for(int i = 1;i<=15;i++)
             {
                 tree.Insert(i);
             }
