@@ -7,7 +7,7 @@ namespace TreeTraversal
         static void Main(string[] args)
         {
             Traversal tree = new Traversal();
-            for(int i = 1;i<=15;i++)
+            for(int i = 1;i<=7;i++)
             {
                 tree.Insert(i);
             }
@@ -18,6 +18,8 @@ namespace TreeTraversal
             tree.Inorder(tree.GetRoot);
             Console.WriteLine(" \nPost-order elements");
             tree.Postorder(tree.GetRoot);
+            Console.WriteLine(" \nLevel-order elements");
+            tree.LevelOrder(tree.GetRoot);
             Console.Read();
         }
     }

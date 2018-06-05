@@ -14,6 +14,7 @@ namespace TreeTraversal
         {
 
         }
+
         public Node GetRoot
         {
             get
@@ -39,6 +40,7 @@ namespace TreeTraversal
                 isAdded = false;
             }
         }
+
         public void Add(Node current, Node toAdd, int iterationOfHeight)
         {
             iterationOfHeight++;
@@ -77,6 +79,40 @@ namespace TreeTraversal
 
         }
 
+        public void LevelOrder(Node node)
+        {
+            if (node == null)
+            {
+                Console.WriteLine("The tree is empty");
+                return;
+            }
+
+            int level = 1;
+            while (PrintLevel(node, level))
+            {
+                level++;
+            }
+
+        }
+
+        public bool PrintLevel(Node current, int level)
+        {
+            if (current == null)
+            {
+                return false;
+            }
+
+            if (level == 1)
+            {
+                Console.Write(current.item + " ");
+                return true;
+            }
+
+            bool leftSide = PrintLevel(current.left, level - 1);
+            bool rightSide = PrintLevel(current.right, level - 1);
+            return true;
+        }
+
         public void Preorder(Node node)
         {
             if (node != null)
@@ -86,6 +122,7 @@ namespace TreeTraversal
                 Preorder(node.right);
             }
         }
+
         public void Inorder(Node node)
         {
             if (node != null)
@@ -95,6 +132,7 @@ namespace TreeTraversal
                 Inorder(node.right);
             }
         }
+
         public void Postorder(Node node)
         {
             if (node != null)
