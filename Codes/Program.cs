@@ -22,7 +22,10 @@ namespace TreeTraversal
             Console.WriteLine(" \nLevel-order elements");
             tree.LevelOrder(tree.GetRoot);
             tree.ConvertingHeap();
-            Console.WriteLine(" \nMax heap");
+            Console.WriteLine(" \nMax heap Tree");
+            tree.LevelOrder(tree.GetRoot);
+            tree.Deletion();
+            Console.WriteLine(" \nAfter Deletion the max heap tree");
             tree.LevelOrder(tree.GetRoot);
             Console.Read();
         }

@@ -5,7 +5,7 @@ namespace TreeTraversal
     public class Traversal
     {
         private Node root = null;
-        private Node nodeOfIndex = null;
+        private Node indexOfNode = null;
         private int count = 0;
         private int heightLimit = 3;
         private bool isAdded = false;
@@ -155,10 +155,36 @@ namespace TreeTraversal
             }
         }
 
+        public void Deletion()
+        {
+            int lastelement = count - 1;
+            Node exactNode = IndexOfNode(lastelement);
+            int temp = exactNode.item;
+            exactNode.item = root.item;
+            root.item = temp;
+            EleminateRoot(exactNode.item);
+            ConvertingHeap();
+        }
+
+        public void EleminateRoot(int nodevalue)
+        {
+            int index = (count - 2) / 2;
+            Node exactNode = IndexOfNode(index);
+            if(exactNode.left.item == nodevalue)
+            {
+                exactNode.left = null;
+            }
+            if(exactNode.right.item == nodevalue)
+            {
+                exactNode.right = null;
+            }
+            count--;
+        }
+
         public void MaxHeapify(Node current, int index, int numberOfNodes)
         {
             Node exactNode = IndexOfNode(index);
-            nodeOfIndex = null;
+            indexOfNode = null;
             Node leftSide = exactNode.left;
             Node rightSide = exactNode.right;
             Node largest = exactNode;
@@ -192,7 +218,7 @@ namespace TreeTraversal
                 }
                 treeLevel++;
             }
-            return nodeOfIndex;
+            return indexOfNode;
         }
 
         public Node LevelNode(Node current, int level, int indexofNode)
@@ -206,18 +232,17 @@ namespace TreeTraversal
             {
                 if (current.index == indexofNode)
                 {
-                    nodeOfIndex = current;
-                    return nodeOfIndex;
+                    indexOfNode = current;
+                    return indexOfNode;
                 }
                 else
                 {
                     return null;
                 }
-
             }
             LevelNode(current.left, level - 1, indexofNode);
             LevelNode(current.right, level - 1, indexofNode);
-            return nodeOfIndex;
+            return indexOfNode;
         }
     }
 }
