@@ -6,12 +6,13 @@ namespace TreeTraversal
     {
         static void Main(string[] args)
         {
+
             Traversal tree = new Traversal();
-            for(int i = 1;i<=7;i++)
+            for (int i = 1; i <= 7; i++)
             {
                 tree.Insert(i);
             }
-            
+
             Console.WriteLine("Pre-Order elements");
             tree.Preorder(tree.GetRoot);
             Console.WriteLine(" \nInorder elements");
@@ -19,6 +20,9 @@ namespace TreeTraversal
             Console.WriteLine(" \nPost-order elements");
             tree.Postorder(tree.GetRoot);
             Console.WriteLine(" \nLevel-order elements");
+            tree.LevelOrder(tree.GetRoot);
+            tree.ConvertingHeap();
+            Console.WriteLine(" \nMax heap");
             tree.LevelOrder(tree.GetRoot);
             Console.Read();
         }
