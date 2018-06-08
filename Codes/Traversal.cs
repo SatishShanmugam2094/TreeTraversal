@@ -9,6 +9,7 @@ namespace TreeTraversal
         private int count = 0;
         private int heightLimit = 3;
         private bool isAdded = false;
+        private bool isFound = false;
         private int height = 0;
 
         public Traversal()
@@ -155,26 +156,35 @@ namespace TreeTraversal
             }
         }
 
-        public void Deletion()
+        public int Deletion()
         {
             int lastelement = count - 1;
             Node exactNode = IndexOfNode(lastelement);
             int temp = exactNode.item;
             exactNode.item = root.item;
             root.item = temp;
-            EleminateRoot(exactNode.item);
+            EleminateRoot(exactNode.item, exactNode.index);
             ConvertingHeap();
+            return exactNode.item;
         }
 
-        public void EleminateRoot(int nodevalue)
+        public void EleminateRoot(int nodevalue, int indexToDelete)
         {
-            int index = (count - 2) / 2;
+            int index;
+            if (indexToDelete % 2 == 0 && indexToDelete < 7)
+            {
+                index = (indexToDelete - 1) / 2;
+            }
+            else
+            {
+                index = indexToDelete / 2;
+            }
             Node exactNode = IndexOfNode(index);
-            if(exactNode.left.item == nodevalue)
+            if (exactNode.left.item == nodevalue)
             {
                 exactNode.left = null;
             }
-            if(exactNode.right.item == nodevalue)
+            else
             {
                 exactNode.right = null;
             }
@@ -188,6 +198,7 @@ namespace TreeTraversal
             Node leftSide = exactNode.left;
             Node rightSide = exactNode.right;
             Node largest = exactNode;
+
             if (leftSide != null && leftSide.item > exactNode.item)
             {
                 largest = leftSide;
@@ -233,6 +244,7 @@ namespace TreeTraversal
                 if (current.index == indexofNode)
                 {
                     indexOfNode = current;
+                    isFound = true;
                     return indexOfNode;
                 }
                 else
@@ -242,7 +254,11 @@ namespace TreeTraversal
             }
             LevelNode(current.left, level - 1, indexofNode);
             LevelNode(current.right, level - 1, indexofNode);
-            return indexOfNode;
+            if (!isFound)
+            {
+                return indexOfNode;
+            }
+            return null;
         }
     }
 }

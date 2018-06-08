@@ -6,13 +6,14 @@ namespace TreeTraversal
     {
         static void Main(string[] args)
         {
-
+            Console.WriteLine("TREE STRUCTURE");
+            Console.WriteLine("Enter integer elements you want to form a tree with including  a space between each element in a single line ");
+            string[] elements = Console.ReadLine().Split(' ');
             Traversal tree = new Traversal();
-            for (int i = 1; i <= 7; i++)
+            for (int i = 0; i < elements.Length; i++)
             {
-                tree.Insert(i);
+                tree.Insert(Convert.ToInt32(elements[i]));
             }
-
             Console.WriteLine("Pre-Order elements");
             tree.Preorder(tree.GetRoot);
             Console.WriteLine(" \nInorder elements");
@@ -24,10 +25,12 @@ namespace TreeTraversal
             tree.ConvertingHeap();
             Console.WriteLine(" \nMax heap Tree");
             tree.LevelOrder(tree.GetRoot);
-            tree.Deletion();
+            Console.WriteLine(" \nDeletion");
+            Console.WriteLine(" The deleted root is {0}", tree.Deletion());
             Console.WriteLine(" \nAfter Deletion the max heap tree");
             tree.LevelOrder(tree.GetRoot);
             Console.Read();
         }
+       
     }
 }
